@@ -23,8 +23,9 @@ public class DeduplicationFileTask extends RecursiveTask<TreeMap<String,FileEnti
             long key = keys.next();
             ArrayList<FileEntity> value = mAllFileMap.get(key);
             if(value.size()>1){
-                FileEntity entity = value.get(0);
-                mDeduplicationMap.put(entity.getPath(),entity);
+                for(FileEntity e:value){
+                    mDeduplicationMap.put(e.getPath(),e);
+                }
             }
         }
         return mDeduplicationMap;

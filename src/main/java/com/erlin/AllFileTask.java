@@ -33,18 +33,19 @@ public class AllFileTask extends RecursiveTask<Long> {
     }
 
     public void addFileEntity(File fileEntity) {
-        ArrayList<FileEntity> entities = new ArrayList<>();
+
+        ArrayList<FileEntity> entities = null;
         FileEntity entity = new FileEntity();
         entity.setFile(fileEntity);
 
         long key = fileEntity.length();
-
         if (mFileTreeMap.containsKey(key)) {
             entities = mFileTreeMap.get(key);
+            entities.add(entity);
+        }else{
+            entities = new ArrayList<>();
+            entities.add(entity);
+            mFileTreeMap.put(key, entities);
         }
-
-        entities.add(entity);
-
-        mFileTreeMap.put(key, entities);
     }
 }

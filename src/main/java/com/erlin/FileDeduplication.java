@@ -20,14 +20,14 @@ public class FileDeduplication {
         long time = System.currentTimeMillis();
         FileDeduplication mFileDeduplication = new FileDeduplication();
 
-        AllFileTask mTask = new AllFileTask(new File("/home/erlin/Documents/webmagic/"),mFileDeduplication.mAllFilsMap);
+        AllFileTask mTask = new AllFileTask(new File("/mnt/HHD-2TB-1/webmagic"),mFileDeduplication.mAllFilsMap);
         mFileDeduplication.mThreadPool.invoke(mTask);
 
 
         DeduplicationFileTask mDeduplicationTask = new DeduplicationFileTask(mFileDeduplication.mAllFilsMap);
         mFileDeduplication.mFileDeduplicationMap = mFileDeduplication.mThreadPool.invoke(mDeduplicationTask);
 
-        if(mFileDeduplication!=null){
+        if(mFileDeduplication.mFileDeduplicationMap!=null){
             System.out.println("文件总数："+(mFileDeduplication.mAllFilsMap.size()+mFileDeduplication.mFileDeduplicationMap.size()));
             System.out.println("文件长度相同的有："+mFileDeduplication.mFileDeduplicationMap.size());
             System.out.println("计算长度相同文件的唯一值：");
@@ -35,6 +35,7 @@ public class FileDeduplication {
             FileCalculateTask mCalculateTask = new FileCalculateTask(mFileDeduplication.mFileDeduplicationMap,false,null);
             mFileDeduplication.mThreadPool.invoke(mCalculateTask);
 
+            System.out.println("计算长度相同文件的唯一值：完成");
         }
         mFileDeduplication.mThreadPool.shutdown();
         System.out.println(mFileDeduplication.mAllFilsMap.size());
