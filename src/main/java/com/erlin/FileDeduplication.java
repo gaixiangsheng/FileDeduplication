@@ -20,7 +20,7 @@ public class FileDeduplication {
         long time = System.currentTimeMillis();
         FileDeduplication mFileDeduplication = new FileDeduplication();
 
-        AllFileTask mTask = new AllFileTask(new File("/mnt/HHD-2TB-1/webmagic/"),mFileDeduplication.mAllFilsMap);
+        AllFileTask mTask = new AllFileTask(new File("/home/erlin/Documents/webmagic/"),mFileDeduplication.mAllFilsMap);
         mFileDeduplication.mThreadPool.invoke(mTask);
 
 

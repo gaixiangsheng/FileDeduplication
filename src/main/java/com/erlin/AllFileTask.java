@@ -25,25 +25,26 @@ public class AllFileTask extends RecursiveTask<Long> {
                 AllFileTask task = new AllFileTask(file, mFileTreeMap);
                 invokeAll(task);
             } else {
-                addFileEntity(file.length(), file.getAbsolutePath());
+                addFileEntity(file);
             }
         }
 
         return 0L;
     }
 
-    public void addFileEntity(Long len, String path) {
+    public void addFileEntity(File fileEntity) {
         ArrayList<FileEntity> entities = new ArrayList<>();
         FileEntity entity = new FileEntity();
+        entity.setFile(fileEntity);
 
-        if (mFileTreeMap.containsKey(len)) {
-            entities = mFileTreeMap.get(len);
+        long key = fileEntity.length();
+
+        if (mFileTreeMap.containsKey(key)) {
+            entities = mFileTreeMap.get(key);
         }
 
-        entity.setLenth(len);
-        entity.setPath(path);
         entities.add(entity);
 
-        mFileTreeMap.put(len, entities);
+        mFileTreeMap.put(key, entities);
     }
 }
