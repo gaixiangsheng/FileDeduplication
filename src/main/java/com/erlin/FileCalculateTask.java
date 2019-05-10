@@ -33,7 +33,7 @@ public class FileCalculateTask extends RecursiveTask<FileEntity> {
     protected FileEntity compute() {
         if (isCalculate) {
             mFileEntity.setUniquenessCode(getFileMd5(mFileEntity.getFile()));
-            System.out.println(mFileEntity.getPath()+",md5:"+mFileEntity.getUniquenessCode());
+            System.out.println(mFileEntity.getPath()+",len:"+mFileEntity.getLenth()+",md5:"+mFileEntity.getUniquenessCode());
         } else {
             Iterator<String> keys = mFileDeduplicationMap.keySet().iterator();
             while (keys.hasNext()) {
@@ -43,7 +43,6 @@ public class FileCalculateTask extends RecursiveTask<FileEntity> {
                 invokeAll(task);
             }
         }
-        System.out.println("-");
         return mFileEntity;
     }
 
@@ -51,6 +50,11 @@ public class FileCalculateTask extends RecursiveTask<FileEntity> {
         String md5 = "";
         try {
             int length = (int) file.length();
+
+            if(length<=0 || file.isDirectory()){
+                return md5;
+            }
+
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             InputStream inputStream = Files.newInputStream(file.toPath(), StandardOpenOption.READ);
             if (length <= READ_FILE_BLOCK * 2) {
