@@ -33,7 +33,7 @@ public class FileCalculateTask extends RecursiveTask<FileEntity> {
     protected FileEntity compute() {
         if (isCalculate) {
             mFileEntity.setUniquenessCode(getFileMd5(mFileEntity.getFile()));
-            System.out.println(mFileEntity.getPath()+",len:"+mFileEntity.getLenth()+",md5:"+mFileEntity.getUniquenessCode());
+            //System.out.println(mFileEntity.getPath()+",len:"+mFileEntity.getLenth()+",md5:"+mFileEntity.getUniquenessCode());
         } else {
             Iterator<String> keys = mFileDeduplicationMap.keySet().iterator();
             while (keys.hasNext()) {
