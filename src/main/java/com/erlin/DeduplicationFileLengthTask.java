@@ -7,11 +7,11 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.concurrent.RecursiveTask;
 
-public class DeduplicationFileTask extends RecursiveTask<TreeMap<String,FileEntity>> {
+public class DeduplicationFileLengthTask extends RecursiveTask<TreeMap<String,FileEntity>> {
     private TreeMap<Long, ArrayList<FileEntity>> mAllFileMap;
     private TreeMap<String, FileEntity> mDeduplicationMap;
 
-    public DeduplicationFileTask(TreeMap<Long, ArrayList<FileEntity>> fileMap){
+    public DeduplicationFileLengthTask(TreeMap<Long, ArrayList<FileEntity>> fileMap){
         this.mDeduplicationMap = new TreeMap<>();
         this.mAllFileMap = fileMap;
     }

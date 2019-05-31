@@ -24,7 +24,7 @@ public class FileDeduplication {
         mFileDeduplication.mThreadPool.invoke(mTask);
 
 
-        DeduplicationFileTask mDeduplicationTask = new DeduplicationFileTask(mFileDeduplication.mAllFilsMap);
+        DeduplicationFileLengthTask mDeduplicationTask = new DeduplicationFileLengthTask(mFileDeduplication.mAllFilsMap);
         mFileDeduplication.mFileDeduplicationMap = mFileDeduplication.mThreadPool.invoke(mDeduplicationTask);
 
         if(mFileDeduplication.mFileDeduplicationMap!=null){
